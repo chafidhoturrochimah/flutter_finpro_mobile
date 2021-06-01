@@ -71,14 +71,14 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 7,
                   ),
                   FadeAnimation(
                     1.3, Text(
                       "Welcome Back!", 
                       style: TextStyle(
-                        color: Color.fromRGBO(49, 39, 79, 1),
-                        fontSize: 20,
+                        color: Color.fromRGBO(196, 135, 198, 1),
+                        fontSize: 17,
                         fontFamily: 'Nunito'
                       ),
                     )
