@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_finpro_mobile">
    <application
-        android:label="flutter_finpro_mobile"
+        android:label="My Stock"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
