@@ -10,22 +10,18 @@ class DrawerWidget extends StatelessWidget {
         children: <Widget>[
           _drawerHeader(),
           _drawerItem(
-              icon: Icons.folder,
-              text: 'My Files',
-              onTap: () => print('Tap My Files')),
+              icon: Icons.apps,
+              text: 'About',
+              onTap: () => print('Tap My About')),
           _drawerItem(
-              icon: Icons.group,
-              text: 'Shared with me',
-              onTap: () => print('Tap Shared menu')),
+              icon: Icons.book,
+              text: 'Barang',
+              onTap: () => print('Tap My Barang')),
           _drawerItem(
-              icon: Icons.access_time,
-              text: 'Recent',
-              onTap: () => print('Tap Recent menu')),
-          _drawerItem(
-              icon: Icons.delete,
-              text: 'Trash',
-              onTap: () => print('Tap Trash menu')),
-          Divider(height: 25, thickness: 1),
+              icon: Icons.category,
+              text: 'Kategori',
+              onTap: () => print('Tap Kategori')),
+          Divider(height: 30, thickness: 1),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
             child: Text("Labels",
@@ -35,8 +31,8 @@ class DrawerWidget extends StatelessWidget {
                 )),
           ),
           _drawerItem(
-              icon: Icons.bookmark,
-              text: 'Family',
+              icon: Icons.logout,
+              text: 'Nunito',
               onTap: () => print('Tap Family menu')),
         ],
       ),
@@ -51,25 +47,29 @@ Widget _drawerHeader() {
           imageUrl,
         ),
         radius: 60),
-    otherAccountsPictures: [
-      ClipOval(
-        child: Image(
-            image: AssetImage('assets/images/orang1.jpg'), fit: BoxFit.cover),
-      ),
-      ClipOval(
-        child: Image(
-            image: AssetImage('assets/images/orang3.jpeg'), fit: BoxFit.cover),
-      )
-    ],
+    // otherAccountsPictures: [
+    //   ClipOval(
+    //     child: Image(
+    //         image: AssetImage('assets/images/orang1.jpg'), fit: BoxFit.cover),
+    //   ),
+    //   ClipOval(
+    //     child: Image(
+    //         image: AssetImage('assets/images/orang3.jpeg'), fit: BoxFit.cover),
+    //   )
+    // ],
     accountName: Text(
       name,
       style: TextStyle(
-          fontSize: 12, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+          fontSize: 15,
+          color: Colors.deepPurple[50],
+          fontWeight: FontWeight.bold),
     ),
     accountEmail: Text(
       email,
       style: TextStyle(
-          fontSize: 12, color: Colors.deepPurple, fontWeight: FontWeight.bold),
+          fontSize: 12,
+          color: Colors.deepPurple[50],
+          fontWeight: FontWeight.bold),
     ),
   );
 }

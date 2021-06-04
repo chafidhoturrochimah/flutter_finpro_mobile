@@ -9,16 +9,19 @@ class NavigationDrawer extends StatelessWidget {
     return Scaffold(
       //key: _scaffoldKey,
       appBar: AppBar(
-        title: Text("My Stock"),
+        title: Text(
+          "My Stock",
+          style: TextStyle(fontFamily: 'Candara', fontWeight: FontWeight.bold),
+        ),
         // leading: new IconButton(
         //   icon: new Icon(Icons.account_circle),
         //   onPressed: () => _scaffoldKey.currentState.openDrawer(),
         // ),
       ),
-      drawer: DrawerWidget(),
+      //drawer: DrawerWidget(),
       endDrawer: DrawerWidget(),
       body: Center(
-          child: Text('Belajar Navigation Drawer di Flutter',
+          child: Text('Pencatatan Stok Barang Toko ATK',
               style: TextStyle(fontSize: 20))),
     );
   }
