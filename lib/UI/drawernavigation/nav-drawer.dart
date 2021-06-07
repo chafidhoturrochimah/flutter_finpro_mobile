@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_finpro_mobile/auth/login_page.dart';
 import 'package:flutter_finpro_mobile/auth/sign_in.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -22,18 +23,23 @@ class DrawerWidget extends StatelessWidget {
               text: 'Kategori',
               onTap: () => print('Tap Kategori')),
           Divider(height: 30, thickness: 1),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
-            child: Text("Labels",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                )),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
+          //   child: Text("Labels",
+          //       style: TextStyle(
+          //         fontSize: 16,
+          //         color: Colors.black54,
+          //       )),
+          // ),
           _drawerItem(
-              icon: Icons.logout,
-              text: 'Nunito',
-              onTap: () => print('Tap Family menu')),
+            icon: Icons.exit_to_app,
+            text: 'Log Out',
+            onTap: () async {
+              await googleSignIn.signOut();
+              Navigator.push(context,
+                  new MaterialPageRoute(builder: (context) => new LoginPage()));
+            },
+          ),
         ],
       ),
     );

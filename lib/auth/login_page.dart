@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/UI/animation/FadeAnimation.dart';
 import 'package:flutter_finpro_mobile/UI/launch.dart';
 import 'package:flutter_finpro_mobile/auth/sign_in.dart';
+import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,6 +11,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  //tambahkan form untuk validasi form
+  final _formKey = GlobalKey<FormState>();
+  var auth = new Auth();
+
+  //untuk hidepassword icon
+  bool _isHidePassword = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width; //
@@ -107,38 +124,74 @@ class _LoginPageState extends State<LoginPage> {
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Colors.grey[200]))),
-                                child: TextField(
+                                child: TextFormField(
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  cursorColor: Colors.black,
                                   decoration: InputDecoration(
-                                      icon: Icon(
-                                        Icons.account_circle,
-                                        size: 20,
-                                        color: Color.fromRGBO(49, 39, 79, 1),
-                                      ),
-                                      border: InputBorder.none,
-                                      hintText: "Username",
-                                      hintStyle: TextStyle(
-                                          color: Colors.grey,
-                                          fontFamily: 'Nunito',
-                                          fontSize: 15)),
+                                    icon: Icon(
+                                      Icons.account_circle,
+                                      size: 20,
+                                      color: Color.fromRGBO(49, 39, 79, 1),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText: "Email",
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 15),
+                                  ),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter an Email Address';
+                                    } else if (!value.contains('@')) {
+                                      return 'Please enter a valid email address';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.all(5),
-                                child: TextField(
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: _isHidePassword,
+                                  cursorColor: Colors.black,
                                   decoration: InputDecoration(
-                                      icon: Icon(
-                                        Icons.lock,
-                                        size: 20,
-                                        color: Color.fromRGBO(49, 39, 79, 1),
+                                    icon: Icon(
+                                      Icons.lock,
+                                      size: 20,
+                                      color: Color.fromRGBO(49, 39, 79, 1),
+                                    ),
+                                    border: InputBorder.none,
+                                    hintText: "Password",
+                                    hintStyle: TextStyle(
+                                        color: Colors.grey,
+                                        fontFamily: 'Nunito',
+                                        fontSize: 15),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        _togglePasswordVisibility();
+                                      },
+                                      child: Icon(
+                                        _isHidePassword
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
+                                        color: _isHidePassword
+                                            ? Colors.indigo
+                                            : Colors.indigo,
                                       ),
-                                      border: InputBorder.none,
-                                      hintText: "Password",
-                                      hintStyle: TextStyle(
-                                          color: Colors.grey,
-                                          fontFamily: 'Nunito',
-                                          fontSize: 15)),
-                                  obscureText:
-                                      true, // agar teks yang diinput berubah jadi simbol *
+                                    ),
+                                    isDense: true,
+                                  ),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return 'Enter Password';
+                                    } else if (value.length < 6) {
+                                      return 'Password must be 8 characters!';
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                             ],
@@ -171,11 +224,27 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(50),
                           color: Color.fromRGBO(49, 39, 79, 1),
                         ),
-                        child: Center(
+                        child: RaisedButton(
+                          padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
+                          color: Colors.indigo[900],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusDirectional.circular(30),
+                          ),
+                          onPressed: () {
+                            auth
+                                .createUserWithEmail(emailController.text,
+                                    passwordController.text)
+                                .then((User user) {
+                              Navigator.push(
+                                  context,
+                                  new MaterialPageRoute(
+                                      builder: (context) =>
+                                          new NavigationDrawer()));
+                            }).catchError((e) => print(e));
+                          },
                           child: Text(
-                            "Login",
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Nunito'),
+                            "Register",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       )),
