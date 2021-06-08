@@ -4,7 +4,7 @@ class Kategori {
   final String deskripsi;
 
   // konstruktor versi 1 untuk mengeset nilai
-  Kategori(this.kategoriId, this.namakategori, this.deskripsi);
+  Kategori({this.kategoriId, this.namakategori, this.deskripsi});
 
   // konstruktor versi 2: konversi dari Map ke bARANG
   //untuk mengambil data dari sql yang tersimpan berbentuk Map

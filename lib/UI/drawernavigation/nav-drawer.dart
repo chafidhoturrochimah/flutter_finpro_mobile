@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/auth/login_page.dart';
 import 'package:flutter_finpro_mobile/auth/sign_in.dart';
+import 'package:flutter_finpro_mobile/firestore/UI/Home.dart';
+import 'package:flutter_finpro_mobile/firestore/UI/HomeKategori.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -15,13 +17,17 @@ class DrawerWidget extends StatelessWidget {
               text: 'About',
               onTap: () => print('Tap My About')),
           _drawerItem(
-              icon: Icons.book,
-              text: 'Barang',
-              onTap: () => print('Tap My Barang')),
+            icon: Icons.book,
+            text: 'Barang',
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomeBarang())),
+          ),
           _drawerItem(
-              icon: Icons.category,
-              text: 'Kategori',
-              onTap: () => print('Tap Kategori')),
+            icon: Icons.category,
+            text: 'Kategori',
+            onTap: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomeKategori())),
+          ),
           Divider(height: 30, thickness: 1),
           // Padding(
           //   padding: const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
@@ -37,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
             onTap: () async {
               await googleSignIn.signOut();
               Navigator.push(context,
-                  new MaterialPageRoute(builder: (context) => new LoginPage()));
+                  new MaterialPageRoute(builder: (context) => LoginPage()));
             },
           ),
         ],
@@ -48,6 +54,9 @@ class DrawerWidget extends StatelessWidget {
 
 Widget _drawerHeader() {
   return UserAccountsDrawerHeader(
+    decoration: BoxDecoration(
+      color: Color.fromRGBO(49, 39, 79, 1),
+    ),
     currentAccountPicture: CircleAvatar(
         backgroundImage: NetworkImage(
           imageUrl,

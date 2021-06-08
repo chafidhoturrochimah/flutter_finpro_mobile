@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
     final double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(196, 135, 198, 1),
+      backgroundColor: Color.fromRGBO(49, 39, 79, 1),
       body: Container(
         width: double.infinity,
         child: Stack(
@@ -96,38 +96,38 @@ class _SplashScreenState extends State<SplashScreen>
                     height: 400,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/splash-1.png'),
+                            image: AssetImage('assets/one.png'),
                             fit: BoxFit.cover)),
                   )),
             ),
-            // Positioned(
-            //   top: -100,
-            //   left: 0,
-            //   child: FadeAnimation(1.3, Container(
-            //     width: width,
-            //     height: 400,
-            //     decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //         image: AssetImage('assets/splash-1.png'),
-            //         fit: BoxFit.cover
-            //       )
-            //     ),
-            //   )),
-            // ),
-            // Positioned(
-            //   top: -150,
-            //   left: 0,
-            //   child: FadeAnimation(1.6, Container(
-            //     width: width,
-            //     height: 400,
-            //     decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //         image: AssetImage('assets/splash-1.png'),
-            //         fit: BoxFit.cover
-            //       )
-            //     ),
-            //   )),
-            // ),
+            Positioned(
+              top: -100,
+              left: 0,
+              child: FadeAnimation(
+                  1.3,
+                  Container(
+                    width: width,
+                    height: 400,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/one.png'),
+                            fit: BoxFit.cover)),
+                  )),
+            ),
+            Positioned(
+              top: -150,
+              left: 0,
+              child: FadeAnimation(
+                  1.6,
+                  Container(
+                    width: width,
+                    height: 400,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/one.png'),
+                            fit: BoxFit.cover)),
+                  )),
+            ),
             Container(
               padding: EdgeInsets.all(20.0),
               child: Column(
@@ -138,7 +138,11 @@ class _SplashScreenState extends State<SplashScreen>
                       1,
                       Text(
                         "Welcome !",
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.bold),
                       )),
                   SizedBox(
                     height: 15,
@@ -146,14 +150,15 @@ class _SplashScreenState extends State<SplashScreen>
                   FadeAnimation(
                       1.5,
                       Text(
-                        "We promis that you'll have the most \nfuss-free time with us ever.",
+                        "We promise that you'll have \nthe most fuss-free time with \nus ever.",
                         style: TextStyle(
                             color: Colors.white.withOpacity(.7),
                             height: 1.4,
-                            fontSize: 20),
+                            fontSize: 20,
+                            fontFamily: 'Nunito'),
                       )),
                   SizedBox(
-                    height: 180,
+                    height: 50,
                   ),
                   FadeAnimation(
                       1.6,
@@ -187,16 +192,13 @@ class _SplashScreenState extends State<SplashScreen>
                                                     scale:
                                                         _scale2Animation.value,
                                                     child: Container(
-                                                      width: 40,
-                                                      height: 40,
+                                                      width: 60,
+                                                      height: 60,
                                                       decoration: BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
-                                                          color: Color.fromRGBO(
-                                                              196,
-                                                              135,
-                                                              198,
-                                                              1)),
+                                                          color: Colors.blue
+                                                              .withOpacity(.4)),
                                                       child: hideIcon == false
                                                           ? Icon(
                                                               Icons

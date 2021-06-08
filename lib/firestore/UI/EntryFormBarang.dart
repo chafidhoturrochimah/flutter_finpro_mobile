@@ -1,3 +1,184 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
+import 'package:flutter_finpro_mobile/firestore/providers/barang_provider.dart';
+import 'package:provider/provider.dart';
+
+class EntryFormBarang extends StatefulWidget {
+  final Barang barang;
+
+  EntryFormBarang([this.barang]);
+
+  @override
+  _EntryFormBarangState createState() => _EntryFormBarangState();
+}
+
+class _EntryFormBarangState extends State<EntryFormBarang> {
+  final barangIdController = TextEditingController();
+  final kodeBrgController = TextEditingController();
+  final namakategoriController = TextEditingController();
+  final namaBrgController = TextEditingController();
+  final hargaController = TextEditingController();
+  final stokAwalController = TextEditingController();
+  final inBrgController = TextEditingController();
+  final outBrgController = TextEditingController();
+  final stokAkhirController = TextEditingController();
+
+  @override
+  void dispose() {
+    barangIdController.dispose();
+    kodeBrgController.dispose();
+    namakategoriController.dispose();
+    namaBrgController.dispose();
+    hargaController.dispose();
+    stokAwalController.dispose();
+    inBrgController.dispose();
+    outBrgController.dispose();
+    stokAkhirController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    if (widget.barang == null) {
+      //New Record
+      barangIdController.text = "";
+      kodeBrgController.text = "";
+      namakategoriController.text = "";
+      namaBrgController.text = "";
+      hargaController.text = "";
+      stokAwalController.text = "";
+      inBrgController.text = "";
+      outBrgController.text = "";
+      stokAkhirController.text = "";
+      new Future.delayed(Duration.zero, () {
+        final barangProvider =
+            Provider.of<BarangProvider>(context, listen: false);
+        barangProvider.loadValues(Barang());
+      });
+    } else {
+      //Controller Update
+      barangIdController.text = widget.barang.barangId;
+      kodeBrgController.text = widget.barang.kodeBrg;
+      namakategoriController.text = widget.barang.namakategori;
+      namaBrgController.text = widget.barang.namaBrg;
+      hargaController.text = widget.barang.harga.toString();
+      stokAwalController.text = widget.barang.stokAwal.toString();
+      inBrgController.text = widget.barang.inBrg.toString();
+      outBrgController.text = widget.barang.outBrg.toString();
+      stokAkhirController.text = widget.barang.stokAkhir.toString();
+      //State Update
+      new Future.delayed(Duration.zero, () {
+        final barangProvider =
+            Provider.of<BarangProvider>(context, listen: false);
+        barangProvider.loadValues(widget.barang);
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final barangProvider = Provider.of<BarangProvider>(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text('Edit Stok')),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView(
+          children: <Widget>[
+            TextField(
+              controller: barangIdController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'ID Barang'),
+              onChanged: (value) {
+                barangProvider.changebarangId(value);
+              },
+            ),
+            TextField(
+              controller: kodeBrgController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: 'Kode Barang'),
+              onChanged: (value) {
+                barangProvider.changekodeBrg(value);
+              },
+            ),
+            TextField(
+              controller: namakategoriController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: 'Kategori'),
+              onChanged: (value) {
+                barangProvider.changenamakategori(value);
+              },
+            ),
+            TextField(
+              controller: namaBrgController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(hintText: 'Nama Barang'),
+              onChanged: (value) {
+                barangProvider.changenamaBrg(value);
+              },
+            ),
+            TextField(
+              controller: hargaController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Harga'),
+              onChanged: (value) => barangProvider.changeharga(value),
+            ),
+            TextField(
+              controller: stokAwalController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Stok Awal'),
+              onChanged: (value) => barangProvider.changestokAwal(value),
+            ),
+            TextField(
+              controller: inBrgController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Barang Masuk'),
+              onChanged: (value) => barangProvider.changeinBrg(value),
+            ),
+            TextField(
+              controller: outBrgController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Barang Keluar'),
+              onChanged: (value) => barangProvider.changeoutBrg(value),
+            ),
+            TextField(
+              controller: stokAkhirController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Stok Akhir'),
+              onChanged: (value) => barangProvider.changestokAkhir(value),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            ElevatedButton(
+              child: Text('Save'),
+              onPressed: () {
+                barangProvider.saveBarang();
+                Navigator.of(context).pop();
+              },
+            ),
+            (widget.barang != null)
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      onPrimary: Colors.white,
+                    ),
+                    child: Text('Delete'),
+                    onPressed: () {
+                      barangProvider.removeBarang(widget.barang.barangId);
+                      Navigator.of(context).pop();
+                    },
+                  )
+                : Container(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
 // import 'package:flutter/material.dart';
 // import 'package:flutter_finpro_mobile/firestore/models/Barang.dart';
 // import 'package:flutter_finpro_mobile/firestore/models/Kategori.dart';

@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                   validator: (value) {
                                     if (value.isEmpty) {
                                       return 'Enter Password';
-                                    } else if (value.length < 6) {
+                                    } else if (value.length < 8) {
                                       return 'Password must be 8 characters!';
                                     }
                                     return null;
@@ -222,30 +222,37 @@ class _LoginPageState extends State<LoginPage> {
                         margin: EdgeInsets.symmetric(horizontal: 60),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
-                          color: Color.fromRGBO(49, 39, 79, 1),
+                          //color: Color.fromRGBO(49, 39, 79, 1),
                         ),
                         child: RaisedButton(
                           padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
-                          color: Colors.indigo[900],
+                          color: Color.fromRGBO(49, 39, 79, 1),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusDirectional.circular(30),
                           ),
-                          onPressed: () {
-                            auth
-                                .createUserWithEmail(emailController.text,
-                                    passwordController.text)
-                                .then((User user) {
-                              Navigator.push(
-                                  context,
-                                  new MaterialPageRoute(
-                                      builder: (context) =>
-                                          new NavigationDrawer()));
-                            }).catchError((e) => print(e));
-                          },
                           child: Text(
-                            "Register",
+                            "Login",
                             style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              auth
+                                  .signInEmail(emailController.text,
+                                      passwordController.text)
+                                  .then((User user) {
+                                if (user != null) {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        //return SuccessScreen();
+                                        return NavigationDrawer();
+                                      },
+                                    ),
+                                  );
+                                }
+                              });
+                            }
+                          },
                         ),
                       )),
                   SizedBox(

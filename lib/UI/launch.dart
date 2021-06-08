@@ -13,6 +13,8 @@ class NavigationDrawer extends StatelessWidget {
           "My Stock",
           style: TextStyle(fontFamily: 'Candara', fontWeight: FontWeight.bold),
         ),
+        backgroundColor: Color.fromRGBO(49, 39, 79, 1),
+        elevation: 3,
         // leading: new IconButton(
         //   icon: new Icon(Icons.account_circle),
         //   onPressed: () => _scaffoldKey.currentState.openDrawer(),
@@ -22,7 +24,7 @@ class NavigationDrawer extends StatelessWidget {
       endDrawer: DrawerWidget(),
       body: Center(
           child: Text('Pencatatan Stok Barang Toko ATK',
-              style: TextStyle(fontSize: 20))),
+              style: TextStyle(fontSize: 20, fontFamily: 'CandaraBold'))),
     );
   }
 }

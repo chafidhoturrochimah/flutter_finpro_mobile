@@ -1,3 +1,64 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_finpro_mobile/firestore/models/kategori.dart';
+import 'package:provider/provider.dart';
+
+import 'EntryFormKategori.dart';
+
+class HomeKategori extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final kategoris = Provider.of<List<Kategori>>(context);
+    return Scaffold(
+        body: Container(
+            child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Kategori'),
+        backgroundColor: Colors.red.shade900,
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              size: 30.0,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EntryFormKategori(),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+      body: (kategoris != null)
+          ? ListView.builder(
+              itemCount: kategoris.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(kategoris[index].kategoriId),
+                  trailing: Text(
+                    kategoris[index].namakategori,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => EntryFormKategori(
+                          kategoris[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            )
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
+    )));
+  }
+}
+
 // import 'package:flutter/material.dart';
 // import 'package:flutter_uts_stokatk/Helpers/DbHelper.dart';
 // import 'package:flutter_uts_stokatk/Models/Kategori.dart';

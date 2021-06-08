@@ -1,16 +1,81 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
+import 'package:provider/provider.dart';
+import 'EntryFormBarang.dart';
+
+class HomeBarang extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final barangs = Provider.of<List<Barang>>(context);
+
+    return Scaffold(
+        body: Container(
+            child: Scaffold(
+      appBar: AppBar(
+        title: const Text('Daftar Barang'),
+        backgroundColor: Colors.red.shade900,
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              size: 30.0,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EntryFormBarang(),
+                ),
+              );
+            },
+          )
+        ],
+      ),
+      body: (barangs != null)
+          ? ListView.builder(
+              itemCount: barangs.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(barangs[index].barangId),
+                  trailing: Text(
+                    barangs[index].namaBrg,
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => EntryFormBarang(
+                          barangs[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            )
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
+    )));
+  }
+}
+
+
+
+
+
+
 // import 'package:flutter/material.dart';
 // import 'dart:async';
-// import 'EntryFormBarang.dart';
+
+// import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
 
 // //pendukung program asinkron
-// class Home extends StatefulWidget {
+// class HomeBarang extends StatefulWidget {
 //   @override
-//   HomeState createState() => HomeState();
+//   HomeBarangState createState() => HomeBarangState();
 // }
 
-// class HomeState extends State<Home> {
-//   DbHelper dbHelper = DbHelper();
-
+// class HomeBarangState extends State<HomeBarang> {
 //   int count = 0;
   
 //   List<Barang> itemList;

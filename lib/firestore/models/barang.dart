@@ -10,8 +10,16 @@ class Barang {
   final int stokAkhir;
 
   // konstruktor versi 1 untuk mengeset nilai
-  Barang(this.barangId, this.kodeBrg, this.namakategori, this.namaBrg,
-      this.harga, this.stokAwal, this.inBrg, this.outBrg, this.stokAkhir);
+  Barang(
+      {this.barangId,
+      this.kodeBrg,
+      this.namakategori,
+      this.namaBrg,
+      this.harga,
+      this.stokAwal,
+      this.inBrg,
+      this.outBrg,
+      this.stokAkhir});
 
   // konstruktor versi 2: konversi dari Map ke bARANG
   //untuk mengambil data dari sql yang tersimpan berbentuk Map
