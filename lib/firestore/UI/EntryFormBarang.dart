@@ -13,7 +13,6 @@ class EntryFormBarang extends StatefulWidget {
 }
 
 class _EntryFormBarangState extends State<EntryFormBarang> {
-  final barangIdController = TextEditingController();
   final kodeBrgController = TextEditingController();
   final namakategoriController = TextEditingController();
   final namaBrgController = TextEditingController();
@@ -25,7 +24,6 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
 
   @override
   void dispose() {
-    barangIdController.dispose();
     kodeBrgController.dispose();
     namakategoriController.dispose();
     namaBrgController.dispose();
@@ -40,8 +38,6 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
   @override
   void initState() {
     if (widget.barang == null) {
-      //New Record
-      barangIdController.text = "";
       kodeBrgController.text = "";
       namakategoriController.text = "";
       namaBrgController.text = "";
@@ -51,16 +47,14 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
       outBrgController.text = "";
       stokAkhirController.text = "";
       new Future.delayed(Duration.zero, () {
-        final barangProvider =
-            Provider.of<BarangProvider>(context, listen: false);
-        barangProvider.loadValues(Barang());
+        final barangs = Provider.of<BarangProvider>(context, listen: false);
+        barangs.loadValues(Barang());
       });
     } else {
       //Controller Update
-      barangIdController.text = widget.barang.barangId;
-      kodeBrgController.text = widget.barang.kodeBrg;
-      namakategoriController.text = widget.barang.namakategori;
-      namaBrgController.text = widget.barang.namaBrg;
+      kodeBrgController.text = widget.barang.kodeBrg.toString();
+      namakategoriController.text = widget.barang.namakategori.toString();
+      namaBrgController.text = widget.barang.namaBrg.toString();
       hargaController.text = widget.barang.harga.toString();
       stokAwalController.text = widget.barang.stokAwal.toString();
       inBrgController.text = widget.barang.inBrg.toString();
@@ -68,9 +62,8 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
       stokAkhirController.text = widget.barang.stokAkhir.toString();
       //State Update
       new Future.delayed(Duration.zero, () {
-        final barangProvider =
-            Provider.of<BarangProvider>(context, listen: false);
-        barangProvider.loadValues(widget.barang);
+        final barangs = Provider.of<BarangProvider>(context, listen: false);
+        barangs.loadValues(widget.barang);
       });
     }
     super.initState();
@@ -78,83 +71,137 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
 
   @override
   Widget build(BuildContext context) {
-    final barangProvider = Provider.of<BarangProvider>(context);
+    final barangs = Provider.of<BarangProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Stok')),
+      appBar: AppBar(
+        title: Text(
+          'Edit Stok',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Candara Bold',
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(49, 39, 79, 1),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: <Widget>[
             TextField(
-              controller: barangIdController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'ID Barang'),
-              onChanged: (value) {
-                barangProvider.changebarangId(value);
-              },
-            ),
-            TextField(
               controller: kodeBrgController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Kode Barang'),
+              decoration: InputDecoration(
+                labelText: 'Kode Barang',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
               onChanged: (value) {
-                barangProvider.changekodeBrg(value);
+                barangs.changekodeBrg(value);
               },
             ),
             TextField(
               controller: namakategoriController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Kategori'),
+              decoration: InputDecoration(
+                labelText: 'Kategori',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
               onChanged: (value) {
-                barangProvider.changenamakategori(value);
+                barangs.changenamakategori(value);
               },
             ),
             TextField(
               controller: namaBrgController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Nama Barang'),
+              decoration: InputDecoration(
+                labelText: 'Nama Barang',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
               onChanged: (value) {
-                barangProvider.changenamaBrg(value);
+                barangs.changenamaBrg(value);
               },
             ),
             TextField(
               controller: hargaController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Harga'),
-              onChanged: (value) => barangProvider.changeharga(value),
+              decoration: InputDecoration(
+                labelText: 'Harga',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                barangs.changeharga(value);
+              },
             ),
             TextField(
               controller: stokAwalController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Stok Awal'),
-              onChanged: (value) => barangProvider.changestokAwal(value),
+              decoration: InputDecoration(
+                labelText: 'Stok Awal',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                barangs.changestokAwal(value);
+              },
             ),
             TextField(
               controller: inBrgController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Barang Masuk'),
-              onChanged: (value) => barangProvider.changeinBrg(value),
+              decoration: InputDecoration(
+                labelText: 'Barang Masuk',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                barangs.changeinBrg(value);
+              },
             ),
             TextField(
               controller: outBrgController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Barang Keluar'),
-              onChanged: (value) => barangProvider.changeoutBrg(value),
+              decoration: InputDecoration(
+                labelText: 'Barang Keluar',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                barangs.changeoutBrg(value);
+              },
             ),
             TextField(
               controller: stokAkhirController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Stok Akhir'),
-              onChanged: (value) => barangProvider.changestokAkhir(value),
+              decoration: InputDecoration(
+                labelText: 'Stok Akhir',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                barangs.changestokAkhir(value);
+              },
             ),
             SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
-              child: Text('Save'),
+              child: Text(
+                'Save',
+                style: TextStyle(fontFamily: 'Nunito'),
+              ),
               onPressed: () {
-                barangProvider.saveBarang();
+                barangs.saveBarang();
                 Navigator.of(context).pop();
               },
             ),
@@ -164,9 +211,12 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
                       primary: Colors.red,
                       onPrimary: Colors.white,
                     ),
-                    child: Text('Delete'),
+                    child: Text(
+                      'Delete',
+                      style: TextStyle(fontFamily: 'Nunito'),
+                    ),
                     onPressed: () {
-                      barangProvider.removeBarang(widget.barang.barangId);
+                      barangs.removeBarang(widget.barang.barangId);
                       Navigator.of(context).pop();
                     },
                   )

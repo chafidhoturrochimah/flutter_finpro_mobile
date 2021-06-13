@@ -4,7 +4,7 @@ import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
 import 'package:uuid/uuid.dart';
 
 class BarangProvider with ChangeNotifier {
-  final firestore = FirestoreService();
+  final firestoreService = FirestoreService();
 
   String _barangId;
   String _kodeBrg;
@@ -102,25 +102,25 @@ class BarangProvider with ChangeNotifier {
           outBrg: outBrg,
           stokAkhir: stokAkhir,
           barangId: uuid.v4());
-      firestore.saveBarang(newBarang);
+      firestoreService.saveBarang(newBarang);
     } else {
       //Update
       var updatedBarang = Barang(
-          barangId: barangId,
-          kodeBrg: kodeBrg,
-          namakategori: namakategori,
-          namaBrg: namaBrg,
-          harga: harga,
-          stokAwal: stokAwal,
-          inBrg: inBrg,
-          outBrg: outBrg,
-          stokAkhir: stokAkhir);
-      firestore.saveBarang(updatedBarang);
+          kodeBrg: _kodeBrg,
+          namakategori: _namakategori,
+          namaBrg: _namaBrg,
+          harga: _harga,
+          stokAwal: _stokAwal,
+          inBrg: _inBrg,
+          outBrg: _outBrg,
+          stokAkhir: _stokAkhir,
+          barangId: _barangId);
+      firestoreService.saveBarang(updatedBarang);
     }
   }
 
 //delete
   removeBarang(String barangId) {
-    firestore.removeBarang(barangId);
+    firestoreService.removeBarang(barangId);
   }
 }

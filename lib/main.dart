@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/UI/splash_screen.dart';
+import 'package:flutter_finpro_mobile/firestore/UI/Home.dart';
+import 'package:flutter_finpro_mobile/firestore/UI/HomeKategori.dart';
 import 'package:provider/provider.dart';
 
 import 'firestore/helper/firestore.dart';
@@ -16,18 +18,20 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final firestore = FirestoreService();
+    final firestoreService = FirestoreService();
 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => BarangProvider()),
         StreamProvider(
-          create: (context) => firestore.getBarangs(), initialData: [],
+          create: (context) => firestoreService.getBarang(),
+          initialData: null,
           // initialData: initialData,
         ),
         ChangeNotifierProvider(create: (context) => KategoriProvider()),
         StreamProvider(
-          create: (context) => firestore.getKategoris(), initialData: [],
+          create: (context) => firestoreService.getKategori(),
+          initialData: null,
           //  initialData: initialData,
         ),
       ],

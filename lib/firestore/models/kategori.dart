@@ -11,9 +11,9 @@ class Kategori {
   //setelah itu akan disimpan kembali dalam bentuk variabel
   Map<String, dynamic> toMap() {
     return {
-      'kategoriId': 'kategoriId',
-      'namakategori': 'namakategori',
-      'deskripsi': 'deskripsi'
+      'kategoriId': kategoriId,
+      'namakategori': namakategori,
+      'deskripsi': deskripsi
     };
   }
 

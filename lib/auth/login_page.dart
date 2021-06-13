@@ -11,12 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var auth = new Auth();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   //tambahkan form untuk validasi form
   final _formKey = GlobalKey<FormState>();
-  var auth = new Auth();
 
   //untuk hidepassword icon
   bool _isHidePassword = true;
@@ -216,59 +216,90 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   //button login
                   FadeAnimation(
-                      1.9,
-                      Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 60),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          //color: Color.fromRGBO(49, 39, 79, 1),
+                    1.9,
+                    // Container(
+                    //   height: 50,
+                    //   margin: EdgeInsets.symmetric(horizontal: 60),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(50),
+                    //     //color: Color.fromRGBO(49, 39, 79, 1),
+                    //   ),
+                    //   child:
+                    Center(
+                      child: RaisedButton(
+                        padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
+                        color: Color.fromRGBO(49, 39, 79, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusDirectional.circular(30),
                         ),
-                        child: RaisedButton(
-                          padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
-                          color: Color.fromRGBO(49, 39, 79, 1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadiusDirectional.circular(30),
-                          ),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              auth
-                                  .signInEmail(emailController.text,
-                                      passwordController.text)
-                                  .then((User user) {
-                                if (user != null) {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        //return SuccessScreen();
-                                        return NavigationDrawer();
-                                      },
-                                    ),
-                                  );
-                                }
-                              });
-                            }
-                          },
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Nunito'),
                         ),
-                      )),
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            auth
+                                .signInEmail(emailController.text,
+                                    passwordController.text)
+                                .then((User user) {
+                              if (user != null) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      //return SuccessScreen();
+                                      return NavigationDrawer();
+                                    },
+                                  ),
+                                );
+                              }
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
                   //sign up / register
                   FadeAnimation(
-                      2,
-                      Center(
-                          child: Text(
-                        "--- Sign in with ---",
-                        style: TextStyle(
-                            color: Color.fromRGBO(196, 135, 198, 1),
-                            fontFamily: 'Nunito',
-                            fontSize: 13),
-                      ))),
+                    2,
+                    // Center(
+                    //     child: Text(
+                    //   "--- Sign in with ---",
+                    //   style: TextStyle(
+                    //       color: Color.fromRGBO(196, 135, 198, 1),
+                    //       fontFamily: 'Nunito',
+                    //       fontSize: 13),
+                    // ))
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Divider(
+                            thickness: 2,
+                            color: Color.fromRGBO(49, 39, 79, 1),
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "OR",
+                          style: TextStyle(
+                              color: Color.fromRGBO(49, 39, 79, 1),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 20),
+                        Expanded(
+                          child: Divider(
+                            thickness: 2,
+                            color: Color.fromRGBO(49, 39, 79, 1),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),

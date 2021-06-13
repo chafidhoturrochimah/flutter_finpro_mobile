@@ -4,7 +4,7 @@ import 'package:flutter_finpro_mobile/firestore/models/kategori.dart';
 import 'package:uuid/uuid.dart';
 
 class KategoriProvider with ChangeNotifier {
-  final firestore = FirestoreService();
+  final firestoreService = FirestoreService();
 
   String _kategoriId;
   String _namakategori;
@@ -48,19 +48,19 @@ class KategoriProvider with ChangeNotifier {
           namakategori: namakategori,
           deskripsi: deskripsi,
           kategoriId: uuid.v4());
-      firestore.saveKategori(newKategori);
+      firestoreService.saveKategori(newKategori);
     } else {
       //Update
       var updateKategori = Kategori(
-          kategoriId: kategoriId,
-          namakategori: namakategori,
-          deskripsi: deskripsi);
-      firestore.saveKategori(updateKategori);
+          namakategori: _namakategori,
+          deskripsi: _deskripsi,
+          kategoriId: _kategoriId);
+      firestoreService.saveKategori(updateKategori);
     }
   }
 
 //delete
   removeKategori(String kategoriId) {
-    firestore.removeKategori(kategoriId);
+    firestoreService.removeKategori(kategoriId);
   }
 }

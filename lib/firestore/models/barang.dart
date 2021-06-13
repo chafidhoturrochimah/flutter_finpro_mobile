@@ -26,15 +26,15 @@ class Barang {
   //setelah itu akan disimpan kembali dalam bentuk variabel
   Map<String, dynamic> toMap() {
     return {
-      'barangId': 'barangId',
-      'kodeBrg': 'kodeBrg',
-      'namakategori': 'namakategori',
-      'namaBrg': 'namaBrg',
-      'harga': 'harga',
-      'stokAwal': 'stokAwal',
-      'inBrg': 'inBrg',
-      'outBrg': 'outBrg',
-      'stokAkhir': 'stokAkhir'
+      'barangId': barangId,
+      'kodeBrg': kodeBrg,
+      'namakategori': namakategori,
+      'namaBrg': namaBrg,
+      'harga': harga,
+      'stokAwal': stokAwal,
+      'inBrg': inBrg,
+      'outBrg': outBrg,
+      'stokAkhir': stokAkhir
     };
   }
 

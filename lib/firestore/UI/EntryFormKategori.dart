@@ -13,13 +13,11 @@ class EntryFormKategori extends StatefulWidget {
 }
 
 class _EntryFormKategoriState extends State<EntryFormKategori> {
-  final kategoriIdController = TextEditingController();
   final namakategoriController = TextEditingController();
   final deskripsiController = TextEditingController();
 
   @override
   void dispose() {
-    kategoriIdController.dispose();
     namakategoriController.dispose();
     deskripsiController.dispose();
     super.dispose();
@@ -28,25 +26,20 @@ class _EntryFormKategoriState extends State<EntryFormKategori> {
   @override
   void initState() {
     if (widget.kategori == null) {
-      //New Record
-      kategoriIdController.text = "";
       namakategoriController.text = "";
       deskripsiController.text = "";
       new Future.delayed(Duration.zero, () {
-        final kategoriProvider =
-            Provider.of<KategoriProvider>(context, listen: false);
-        kategoriProvider.loadValues(Kategori());
+        final kategoris = Provider.of<KategoriProvider>(context, listen: false);
+        kategoris.loadValues(Kategori());
       });
     } else {
       //Controller Update
-      kategoriIdController.text = widget.kategori.kategoriId;
-      namakategoriController.text = widget.kategori.namakategori;
-      deskripsiController.text = widget.kategori.deskripsi;
+      namakategoriController.text = widget.kategori.namakategori.toString();
+      deskripsiController.text = widget.kategori.deskripsi.toString();
       //State Update
       new Future.delayed(Duration.zero, () {
-        final kategoriProvider =
-            Provider.of<KategoriProvider>(context, listen: false);
-        kategoriProvider.loadValues(widget.kategori);
+        final kategoris = Provider.of<KategoriProvider>(context, listen: false);
+        kategoris.loadValues(widget.kategori);
       });
     }
 
@@ -55,43 +48,59 @@ class _EntryFormKategoriState extends State<EntryFormKategori> {
 
   @override
   Widget build(BuildContext context) {
-    final kategoriProvider = Provider.of<KategoriProvider>(context);
+    final kategoris = Provider.of<KategoriProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Edit Kategori')),
+      appBar: AppBar(
+        title: Text(
+          'Edit Kategori',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Candara Bold',
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(49, 39, 79, 1),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: <Widget>[
             TextField(
-              controller: kategoriIdController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Kode kategori'),
-              onChanged: (value) {
-                kategoriProvider.changekategoriId(value);
-              },
-            ),
-            TextField(
               controller: namakategoriController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Nama Kategori'),
+              decoration: InputDecoration(
+                labelText: 'Nama Kategori',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
               onChanged: (value) {
-                kategoriProvider.changeNamaKategori(value);
+                kategoris.changeNamaKategori(value);
               },
             ),
             TextField(
               controller: deskripsiController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(hintText: 'Deskripsi'),
-              onChanged: (value) => kategoriProvider.changeDeskripsi(value),
+              decoration: InputDecoration(
+                labelText: 'Deskripsi',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(2.0),
+                ),
+              ),
+              onChanged: (value) {
+                kategoris.changeDeskripsi(value);
+              },
             ),
             SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
-              child: Text('Save'),
+              child: Text(
+                'Save',
+                style: TextStyle(fontFamily: 'Nunito'),
+              ),
               onPressed: () {
-                kategoriProvider.saveKategori();
+                kategoris.saveKategori();
                 Navigator.of(context).pop();
               },
             ),
@@ -101,10 +110,12 @@ class _EntryFormKategoriState extends State<EntryFormKategori> {
                       primary: Colors.red,
                       onPrimary: Colors.white,
                     ),
-                    child: Text('Delete'),
+                    child: Text(
+                      'Delete',
+                      style: TextStyle(fontFamily: 'Nunito'),
+                    ),
                     onPressed: () {
-                      kategoriProvider
-                          .removeKategori(widget.kategori.kategoriId);
+                      kategoris.removeKategori(widget.kategori.kategoriId);
                       Navigator.of(context).pop();
                     },
                   )
