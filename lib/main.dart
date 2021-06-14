@@ -1,10 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_finpro_mobile/UI/splash_screen.dart';
-import 'package:flutter_finpro_mobile/firestore/UI/Home.dart';
-import 'package:flutter_finpro_mobile/firestore/UI/HomeKategori.dart';
+import 'package:flutter_finpro_mobile/UI/onboarding/landing.dart';
 import 'package:provider/provider.dart';
-
 import 'firestore/helper/firestore.dart';
 import 'firestore/providers/barang_provider.dart';
 import 'firestore/providers/kategori_provider.dart';
@@ -42,7 +40,15 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
           brightness: Brightness.light,
         ),
-        home: SplashScreen(),
+        home: AnimatedSplashScreen(
+          splash: Image.asset(
+            'assets/flaticon.png',
+          ),
+          nextScreen: Landing(),
+          splashTransition: SplashTransition.scaleTransition,
+          backgroundColor: Colors.purple[50],
+          //duration: 3000,
+        ),
       ),
     );
   }

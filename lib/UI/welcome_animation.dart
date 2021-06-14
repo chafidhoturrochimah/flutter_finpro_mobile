@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/UI/animation/FadeAnimation.dart';
+import 'package:flutter_finpro_mobile/UI/dashboard.dart';
+import 'package:flutter_finpro_mobile/UI/onboarding/landing.dart';
 import 'package:flutter_finpro_mobile/auth/login_page.dart';
+import 'package:flutter_finpro_mobile/auth/sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 
-class SplashScreen extends StatefulWidget {
+class Welcome extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _WelcomeState createState() => _WelcomeState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
-    with TickerProviderStateMixin {
+class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
   AnimationController _scaleController;
   AnimationController _scale2Controller;
   AnimationController _widthController;
@@ -66,14 +68,17 @@ class _SplashScreenState extends State<SplashScreen>
 
     _scale2Animation =
         Tween<double>(begin: 1.0, end: 32.0).animate(_scale2Controller)
-          ..addStatusListener((status) {
-            if (status == AnimationStatus.completed) {
-              Navigator.push(
+          ..addStatusListener(
+            (status) {
+              if (status == AnimationStatus.completed) {
+                Navigator.push(
                   context,
                   PageTransition(
-                      type: PageTransitionType.fade, child: LoginPage()));
-            }
-          });
+                      type: PageTransitionType.fade, child: NavigationDrawer()),
+                );
+              }
+            },
+          );
   }
 
   @override
@@ -95,9 +100,10 @@ class _SplashScreenState extends State<SplashScreen>
                     width: width,
                     height: 400,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/one.png'),
-                            fit: BoxFit.cover)),
+                      image: DecorationImage(
+                          image: AssetImage('assets/one.png'),
+                          fit: BoxFit.cover),
+                    ),
                   )),
             ),
             Positioned(
@@ -137,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen>
                   FadeAnimation(
                       1,
                       Text(
-                        "Welcome !",
+                        "Welcome " + name + " !",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
@@ -150,7 +156,7 @@ class _SplashScreenState extends State<SplashScreen>
                   FadeAnimation(
                       1.5,
                       Text(
-                        "We promise that you'll have \nthe most fuss-free time with \nus ever.",
+                        "Mulailah dengan mendaftarkan produk-produkmu bersama \nMy Stock.",
                         style: TextStyle(
                             color: Colors.white.withOpacity(.7),
                             height: 1.4,
@@ -158,7 +164,7 @@ class _SplashScreenState extends State<SplashScreen>
                             fontFamily: 'Nunito'),
                       )),
                   SizedBox(
-                    height: 50,
+                    height: 38,
                   ),
                   FadeAnimation(
                       1.6,
@@ -175,7 +181,8 @@ class _SplashScreenState extends State<SplashScreen>
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: Colors.blue.withOpacity(.4)),
+                                      color:
+                                          Colors.purple[100].withOpacity(.4)),
                                   child: InkWell(
                                     onTap: () {
                                       _scaleController.forward();
@@ -189,25 +196,22 @@ class _SplashScreenState extends State<SplashScreen>
                                             animation: _scale2Controller,
                                             builder: (context, child) =>
                                                 Transform.scale(
-                                                    scale:
-                                                        _scale2Animation.value,
-                                                    child: Container(
-                                                      width: 60,
-                                                      height: 60,
-                                                      decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          color: Colors.blue
-                                                              .withOpacity(.4)),
-                                                      child: hideIcon == false
-                                                          ? Icon(
-                                                              Icons
-                                                                  .arrow_forward,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          : Container(),
-                                                    )),
+                                              scale: _scale2Animation.value,
+                                              child: Container(
+                                                width: 60,
+                                                height: 60,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.purple[100]
+                                                        .withOpacity(.4)),
+                                                child: hideIcon == false
+                                                    ? Icon(
+                                                        Icons.arrow_forward,
+                                                        color: Colors.white,
+                                                      )
+                                                    : Container(),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -218,7 +222,7 @@ class _SplashScreenState extends State<SplashScreen>
                             )),
                       )),
                   SizedBox(
-                    height: 60,
+                    height: 40,
                   ),
                 ],
               ),

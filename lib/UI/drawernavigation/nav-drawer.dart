@@ -28,7 +28,10 @@ class DrawerWidget extends StatelessWidget {
             onTap: () => Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => HomeKategori())),
           ),
-          Divider(height: 30, thickness: 1),
+          SizedBox(
+            height: 200,
+          ),
+          Divider(height: 8, thickness: 1),
           // Padding(
           //   padding: const EdgeInsets.only(left: 20.0, top: 10, bottom: 10),
           //   child: Text("Labels",
@@ -75,16 +78,20 @@ Widget _drawerHeader() {
     accountName: Text(
       name,
       style: TextStyle(
-          fontSize: 15,
-          color: Colors.deepPurple[50],
-          fontWeight: FontWeight.bold),
+        fontSize: 15,
+        color: Colors.deepPurple[50],
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Nunito',
+      ),
     ),
     accountEmail: Text(
       email,
       style: TextStyle(
-          fontSize: 12,
-          color: Colors.deepPurple[50],
-          fontWeight: FontWeight.bold),
+        fontSize: 12,
+        color: Colors.deepPurple[50],
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Nunito',
+      ),
     ),
   );
 }
@@ -100,6 +107,7 @@ Widget _drawerItem({IconData icon, String text, GestureTapCallback onTap}) {
             text,
             style: TextStyle(
               fontWeight: FontWeight.bold,
+              fontFamily: 'Nunito',
             ),
           ),
         ),
@@ -108,4 +116,3 @@ Widget _drawerItem({IconData icon, String text, GestureTapCallback onTap}) {
     onTap: onTap,
   );
 }
-  

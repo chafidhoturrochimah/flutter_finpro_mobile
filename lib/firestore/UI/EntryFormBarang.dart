@@ -76,7 +76,7 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Edit Stok',
+          'Tambah Barang',
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Candara Bold',
@@ -88,114 +88,156 @@ class _EntryFormBarangState extends State<EntryFormBarang> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: <Widget>[
-            TextField(
-              controller: kodeBrgController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Kode Barang',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: TextField(
+                controller: kodeBrgController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Kode Barang',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  barangs.changekodeBrg(value);
+                },
               ),
-              onChanged: (value) {
-                barangs.changekodeBrg(value);
-              },
             ),
-            TextField(
-              controller: namakategoriController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Kategori',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-              ),
-              onChanged: (value) {
-                barangs.changenamakategori(value);
-              },
+            SizedBox(
+              height: 8,
             ),
-            TextField(
-              controller: namaBrgController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Nama Barang',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            Container(
+              child: TextField(
+                controller: namakategoriController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Kategori',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  barangs.changenamakategori(value);
+                },
               ),
-              onChanged: (value) {
-                barangs.changenamaBrg(value);
-              },
             ),
-            TextField(
-              controller: hargaController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Harga',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-              ),
-              onChanged: (value) {
-                barangs.changeharga(value);
-              },
+            SizedBox(
+              height: 8,
             ),
-            TextField(
-              controller: stokAwalController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Stok Awal',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            Container(
+              child: TextField(
+                controller: namaBrgController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Nama Barang',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  barangs.changenamaBrg(value);
+                },
               ),
-              onChanged: (value) {
-                barangs.changestokAwal(value);
-              },
             ),
-            TextField(
-              controller: inBrgController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Barang Masuk',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
-                ),
-              ),
-              onChanged: (value) {
-                barangs.changeinBrg(value);
-              },
+            SizedBox(
+              height: 8,
             ),
-            TextField(
-              controller: outBrgController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Barang Keluar',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            Container(
+              child: TextField(
+                controller: hargaController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Harga',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  barangs.changeharga(value);
+                },
               ),
-              onChanged: (value) {
-                barangs.changeoutBrg(value);
-              },
             ),
-            TextField(
-              controller: stokAkhirController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Stok Akhir',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: TextField(
+                controller: stokAwalController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Stok Awal',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  barangs.changestokAwal(value);
+                },
               ),
-              onChanged: (value) {
-                barangs.changestokAkhir(value);
-              },
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: TextField(
+                controller: inBrgController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Barang Masuk',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  barangs.changeinBrg(value);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: TextField(
+                controller: outBrgController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Barang Keluar',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  barangs.changeoutBrg(value);
+                },
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: TextField(
+                controller: stokAkhirController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Stok Akhir',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  barangs.changestokAkhir(value);
+                },
+              ),
             ),
             SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                onPrimary: Colors.white,
+              ),
               child: Text(
                 'Save',
                 style: TextStyle(fontFamily: 'Nunito'),

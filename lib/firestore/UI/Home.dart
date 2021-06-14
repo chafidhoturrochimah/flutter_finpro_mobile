@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
-import 'package:flutter_finpro_mobile/firestore/providers/barang_provider.dart';
 import 'package:provider/provider.dart';
 import 'EntryFormBarang.dart';
 
@@ -17,7 +16,6 @@ class _HomeBarangState extends State<HomeBarang> {
   @override
   Widget build(BuildContext context) {
     final barang = Provider.of<List<Barang>>(context);
-    final barangs = Provider.of<BarangProvider>(context);
 
     return Scaffold(
         body: Container(
@@ -31,11 +29,11 @@ class _HomeBarangState extends State<HomeBarang> {
           ),
         ),
         backgroundColor: Color.fromRGBO(49, 39, 79, 1),
-        centerTitle: true,
+        centerTitle: false,
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.add,
+              Icons.add_circle,
               size: 30.0,
             ),
             onPressed: () {
@@ -55,63 +53,62 @@ class _HomeBarangState extends State<HomeBarang> {
                 return Card(
                   color: Colors.white,
                   elevation: 2.0,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.purple[100],
-                      child: Icon(Icons.book),
-                    ),
-                    title: Text(
-                      barang[index].kodeBrg,
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.bold,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(6, 7, 6, 4),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.purple[100],
+                        child: Icon(Icons.book),
                       ),
-                    ),
-                    subtitle: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Kategori : ' + barang[index].namakategori,
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                            ),
-                          ),
-                          Text(
-                            'Nama : ' + barang[index].namaBrg,
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                            ),
-                          ),
-                          Text(
-                            'Stok : ' + barang[index].stokAkhir.toString(),
-                            style: TextStyle(
-                              fontFamily: 'Nunito',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      child: Icon(
-                        Icons.delete,
-                        color: Color.fromRGBO(49, 39, 79, 1),
-                      ),
-                      onTap: () {
-                        //TODO 3 Panggil Fungsi untuk delete dari DB berdasarkan Item
-                        barangs.removeBarang(widget.barang.barangId);
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => EntryFormBarang(
-                            barang[index],
-                          ),
+                      title: Text(
+                        barang[index].kodeBrg,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
+                      ),
+                      subtitle: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Kategori : ' + barang[index].namakategori,
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                              ),
+                            ),
+                            Text(
+                              'Nama : ' + barang[index].namaBrg,
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                              ),
+                            ),
+                            Text(
+                              'Stok : ' + barang[index].stokAkhir.toString(),
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      trailing: GestureDetector(
+                        child: Icon(
+                          Icons.edit_location_sharp,
+                          color: Colors.deepPurple,
+                        ),
+                        onTap: () {
+                          //TODO 3 Panggil Fungsi untuk edit dari DB berdasarkan Item
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => EntryFormBarang(
+                                barang[index],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               },

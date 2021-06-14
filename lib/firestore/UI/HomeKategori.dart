@@ -18,7 +18,6 @@ class _HomeKategoriState extends State<HomeKategori> {
   @override
   Widget build(BuildContext context) {
     final kategori = Provider.of<List<Kategori>>(context);
-    final kategoris = Provider.of<KategoriProvider>(context);
 
     return Scaffold(
         body: Container(
@@ -32,11 +31,11 @@ class _HomeKategoriState extends State<HomeKategori> {
           ),
         ),
         backgroundColor: Color.fromRGBO(49, 39, 79, 1),
-        centerTitle: true,
+        centerTitle: false,
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.add,
+              Icons.add_circle,
               size: 30.0,
             ),
             onPressed: () {
@@ -56,44 +55,45 @@ class _HomeKategoriState extends State<HomeKategori> {
                 return Card(
                   color: Colors.white,
                   elevation: 2.0,
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.purple[100],
-                      child: Icon(Icons.book),
-                    ),
-                    title: Text(
-                      kategori[index].namakategori,
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Deskripsi : ' + kategori[index].deskripsi,
-                      style: TextStyle(
-                        fontFamily: 'Nunito',
-                      ),
-                    ),
-                    trailing: GestureDetector(
-                      child: Icon(
-                        Icons.delete,
-                        color: Color.fromRGBO(49, 39, 79, 1),
-                      ),
-                      onTap: () {
-                        //TODO 3 Panggil Fungsi untuk delete dari DB berdasarkan Item
-                        kategoris.removeKategori(widget.kategori.kategoriId);
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => EntryFormKategori(
-                            kategori[index],
-                          ),
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(6, 7, 6, 4),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.purple[100],
+                        child: Icon(
+                          Icons.category_outlined,
                         ),
-                      );
-                    },
+                      ),
+                      title: Text(
+                        kategori[index].namakategori,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        'Deskripsi : ' + kategori[index].deskripsi,
+                        style: TextStyle(
+                          fontFamily: 'Nunito',
+                        ),
+                      ),
+                      trailing: GestureDetector(
+                        child: Icon(
+                          Icons.edit_location_sharp,
+                          color: Colors.deepPurple,
+                        ),
+                        onTap: () {
+                          //TODO 3 Panggil Fungsi untuk edit dari DB berdasarkan Item
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => EntryFormKategori(
+                                kategori[index],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 );
               },

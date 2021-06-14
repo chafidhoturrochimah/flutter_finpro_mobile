@@ -65,36 +65,49 @@ class _EntryFormKategoriState extends State<EntryFormKategori> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: <Widget>[
-            TextField(
-              controller: namakategoriController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Nama Kategori',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: TextField(
+                controller: namakategoriController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: 'Nama Kategori',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  kategoris.changeNamaKategori(value);
+                },
               ),
-              onChanged: (value) {
-                kategoris.changeNamaKategori(value);
-              },
             ),
-            TextField(
-              controller: deskripsiController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Deskripsi',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(2.0),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: TextField(
+                controller: deskripsiController,
+                keyboardType: TextInputType.text,
+                scrollPadding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                decoration: InputDecoration(
+                  labelText: 'Deskripsi',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
                 ),
+                onChanged: (value) {
+                  kategoris.changeDeskripsi(value);
+                },
               ),
-              onChanged: (value) {
-                kategoris.changeDeskripsi(value);
-              },
             ),
             SizedBox(
               height: 20.0,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                onPrimary: Colors.white,
+              ),
               child: Text(
                 'Save',
                 style: TextStyle(fontFamily: 'Nunito'),

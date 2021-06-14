@@ -3,8 +3,8 @@ import 'package:flutter_finpro_mobile/firestore/models/barang.dart';
 import 'package:flutter_finpro_mobile/firestore/models/kategori.dart';
 
 class FirestoreService {
-  FirebaseFirestore _db = FirebaseFirestore.instance;
-
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  
   //barang
   Future<void> saveBarang(Barang barang) {
     return _db.collection('barang').doc(barang.barangId).set(barang.toMap());

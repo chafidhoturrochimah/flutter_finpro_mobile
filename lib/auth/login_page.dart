@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/UI/animation/FadeAnimation.dart';
-import 'package:flutter_finpro_mobile/UI/launch.dart';
+import 'package:flutter_finpro_mobile/UI/dashboard.dart';
+import 'package:flutter_finpro_mobile/UI/welcome_animation.dart';
 import 'package:flutter_finpro_mobile/auth/sign_in.dart';
 import 'auth.dart';
 
@@ -206,7 +207,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                       "Forgot Password ?",
                       style: TextStyle(
-                          color: Color.fromRGBO(196, 135, 198, 1),
+                          color:
+                              Color.fromRGBO(196, 135, 198, 1).withOpacity(0.5),
                           fontFamily: 'Nunito',
                           fontSize: 12),
                     )),
@@ -280,21 +282,26 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           child: Divider(
                             thickness: 2,
-                            color: Color.fromRGBO(49, 39, 79, 1),
+                            color:
+                                Color.fromRGBO(49, 39, 79, 1).withOpacity(0.5),
                           ),
                         ),
                         SizedBox(width: 20),
                         Text(
                           "OR",
                           style: TextStyle(
-                              color: Color.fromRGBO(49, 39, 79, 1),
-                              fontWeight: FontWeight.bold),
+                            color: Color.fromRGBO(196, 135, 198, 1),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Nunito',
+                            fontSize: 12,
+                          ),
                         ),
                         SizedBox(width: 20),
                         Expanded(
                           child: Divider(
                             thickness: 2,
-                            color: Color.fromRGBO(49, 39, 79, 1),
+                            color:
+                                Color.fromRGBO(49, 39, 79, 1).withOpacity(0.5),
                           ),
                         ),
                       ],
@@ -344,7 +351,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return NavigationDrawer();
+                  return Welcome();
                 },
               ),
             );
