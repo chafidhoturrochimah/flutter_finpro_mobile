@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_finpro_mobile/UI/animation/FadeAnimation.dart';
 import 'package:flutter_finpro_mobile/UI/dashboard.dart';
-import 'package:flutter_finpro_mobile/UI/onboarding/landing.dart';
-import 'package:flutter_finpro_mobile/auth/login_page.dart';
 import 'package:flutter_finpro_mobile/auth/sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -181,8 +179,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color:
-                                          Colors.purple[100].withOpacity(.4)),
+                                      color: Colors.white.withOpacity(.5)),
                                   child: InkWell(
                                     onTap: () {
                                       _scaleController.forward();
@@ -202,12 +199,12 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                                 height: 60,
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    color: Colors.purple[100]
-                                                        .withOpacity(.4)),
+                                                    color: Colors.white),
                                                 child: hideIcon == false
                                                     ? Icon(
                                                         Icons.arrow_forward,
-                                                        color: Colors.white,
+                                                        color: Color.fromRGBO(
+                                                            49, 39, 79, 1),
                                                       )
                                                     : Container(),
                                               ),

@@ -78,27 +78,28 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FadeAnimation(
-                      1.5,
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Color.fromRGBO(49, 39, 79, 1),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 35,
-                            fontFamily: 'Nunito'),
-                      )),
-                  SizedBox(
-                    height: 7,
+                    1.5,
+                    Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Color.fromRGBO(49, 39, 79, 1),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 35,
+                          fontFamily: 'Nunito'),
+                    ),
                   ),
-                  FadeAnimation(
-                      1.3,
-                      Text(
-                        "Welcome Back!",
-                        style: TextStyle(
-                            color: Color.fromRGBO(196, 135, 198, 1),
-                            fontSize: 17,
-                            fontFamily: 'Nunito'),
-                      )),
+                  // SizedBox(
+                  //   height: 7,
+                  // ),
+                  // FadeAnimation(
+                  //     1.3,
+                  //     Text(
+                  //       "Welcome Back!",
+                  //       style: TextStyle(
+                  //           color: Color.fromRGBO(196, 135, 198, 1),
+                  //           fontSize: 17,
+                  //           fontFamily: 'Nunito'),
+                  //     )),
                   SizedBox(
                     height: 30,
                   ),
@@ -207,8 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                       "Forgot Password ?",
                       style: TextStyle(
-                          color:
-                              Color.fromRGBO(196, 135, 198, 1).withOpacity(0.5),
+                          color: Color.fromRGBO(49, 39, 79, 1).withOpacity(.5),
                           fontFamily: 'Nunito',
                           fontSize: 12),
                     )),
@@ -283,14 +283,15 @@ class _LoginPageState extends State<LoginPage> {
                           child: Divider(
                             thickness: 2,
                             color:
-                                Color.fromRGBO(49, 39, 79, 1).withOpacity(0.5),
+                                Color.fromRGBO(49, 39, 79, 1).withOpacity(.5),
                           ),
                         ),
                         SizedBox(width: 20),
                         Text(
                           "OR",
                           style: TextStyle(
-                            color: Color.fromRGBO(196, 135, 198, 1),
+                            color:
+                                Color.fromRGBO(49, 39, 79, 1).withOpacity(.5),
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Nunito',
                             fontSize: 12,
@@ -301,7 +302,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Divider(
                             thickness: 2,
                             color:
-                                Color.fromRGBO(49, 39, 79, 1).withOpacity(0.5),
+                                Color.fromRGBO(49, 39, 79, 1).withOpacity(.5),
                           ),
                         ),
                       ],
